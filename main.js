@@ -20,6 +20,11 @@ const clock = new THREE.Clock();
 let cameraRotationAngle = 0; // Initial angle for camera rotation
 const cameraRadius = 2.5; // Distance from the object (radius of the circular path)
 
+// Raycaster and mouse for detecting clicks
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let isModelSelected = false;
+
 // Load the model
 const loader = new GLTFLoader();
 loader.load('/public/scene/scene.gltf', (gltf) => {
@@ -89,6 +94,24 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+// Event listener for mouse clicks
+window.addEventListener('click', (event) => {
+    // Convert mouse click position to normalized device coordinates (-1 to +1 range)
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // Update the raycaster based on the mouse position
+    raycaster.setFromCamera(mouse, camera);
+
+    // Check if the model was clicked
+    if (model) {
+        const intersects = raycaster.intersectObject(model, true);
+        if (intersects.length > 0) {
+            isModelSelected = !isModelSelected; // Toggle model selection
+        }
+    }
+});
+
 // Render and animate the scene
 const animate = () => {
     requestAnimationFrame(animate);
@@ -99,8 +122,13 @@ const animate = () => {
     controls.update();
 
     // Rotate the model around the Y-axis for a soft rotation effect
-    if (model) {
+    if (model && !isModelSelected) {
         model.rotation.y += 0.005; // Adjust the rotation speed as necessary
+    }
+
+    // Rotate the model around the Y-axis when clicked by the user
+    if (isModelSelected && model) {
+        model.rotation.y -= 0.005; // Faster rotation when clicked
     }
 
     // Update camera rotation to give floating effect
@@ -113,55 +141,3 @@ const animate = () => {
 };
 animate();
 
-
-// Text animation setup
-// const texts = [
-//     "Sky is the limit", 
-//     "Sky is <span class='highlight'>NOT</span> the limit"
-// ];
-
-// let currentTextIndex = 0;
-// let currentCharIndex = 0;
-// let typingSpeed = 220; // Typing speed in milliseconds
-// let deletingSpeed = 60; // Deleting speed in milliseconds
-// let pauseBetweenActions = 150; // Pause time after typing before deleting
-
-// const typingTextElement = document.getElementById("typingText");
-
-// // Function to type the text with HTML support
-// function typeText() {
-//     const currentText = texts[currentTextIndex];
-    
-//     // Extract the visible part of the text up to currentCharIndex
-//     typingTextElement.innerHTML = currentText.slice(0, currentCharIndex) + (currentCharIndex < currentText.length ? '|' : ''); // Add cursor
-
-//     if (currentCharIndex < currentText.length) {
-//         currentCharIndex++;
-//         setTimeout(typeText, typingSpeed);
-//     } else {
-//         // Pause before starting to delete
-//         setTimeout(deleteText, pauseBetweenActions);
-//     }
-// }
-
-// Function to delete only the last two words
-// function deleteText() {
-//     let currentText = typingTextElement.textContent; // Get the current text content
-//     const words = currentText.split(" "); // Split it into words
-    
-//     // Check if we are in the first text and there are more than 2 words
-//     if (currentTextIndex === 0 && words.length > 2) {
-//         // Remove only the last two words
-//         words.splice(-2, 2);
-//         typingTextElement.textContent = words.join(" ") + " "; // Rebuild the string without the last two words
-//         setTimeout(deleteText, deletingSpeed); // Continue deleting slowly
-//     } else if (currentTextIndex === 0) {
-//         // Once last two words are deleted, proceed to the next text
-//         currentTextIndex = 1; // Move to the next text
-//         currentCharIndex = 0;
-//         setTimeout(typeText, typingSpeed); // Start typing the second text
-//     }
-// }
-
-// // Start the text animation
-// typeText();

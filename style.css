@@ -1,4 +1,7 @@
 /* General Styles */
+html {
+    overflow-x: hidden; 
+}
 body {
     margin: 0;
     padding: 0;
@@ -9,7 +12,7 @@ body {
 
 /* Navbar General Styles */
 .navbar {
-    position: fixed;
+    position: sticky;
     width: 100%;
     top: 0;
     background-color: rgba(255, 255, 255, 0.507); /* Dark background color for navbar */
@@ -37,12 +40,12 @@ body {
     display: block;
     color: rgb(7, 7, 7); /* Use your grey variable */
     text-align: right;
-    font-size: 1.3em;
+    font-size: 0.8em;
     font-weight: 900;
-    padding: 14px 16px;
+    padding: 10px 16px;
     text-transform: uppercase; /* Apply text transformation */
     text-decoration: none;
-    letter-spacing: .5em;
+    letter-spacing: .2em;
     position: relative;
     transition: color 200ms;
     z-index: 2; /* Ensures the text is above the background */
@@ -94,10 +97,10 @@ body {
 }
 
 .theMoon {
-    
+       
     position: absolute;
     top: 0;
-    left: 0;
+    left: 3.2em;
     transform: translateX(-50%);
     width: 100px;
     height: 100px;
@@ -110,7 +113,7 @@ body {
     
    
     position: absolute;
-    top: 30%;
+    top: 12em;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -122,7 +125,7 @@ body {
     z-index: 3;
     
    
-    font-size: 8rem; /* Adjust size as per your design */
+    font-size: 4.5em; /* Adjust size as per your design */
     font-weight: bold;
     color: white; /* Default text color */
     text-transform: uppercase;
@@ -136,7 +139,7 @@ body {
 /* Undertext Styles */
 .herotUnderText {
     z-index: 2;
-    font-size: 3rem; /* Adjust size */
+    font-size: 1.6em; /* Adjust size */
     color: #ffffff; /* Set the color of the under text */
     
     max-width: 60%; /* Control width for better readability */
@@ -145,10 +148,10 @@ body {
 .SKY {
    
     z-index: 1; /* Ensure it stays behind the moon */
-    font-size: 4rem;
+    font-size: 3.5em;
     position: relative; /* Ensure it's positioned correctly */
-    top: -21%; /* Adjust as necessary */
-    left: 0%; /* Adjust position relative to the hero section */
+    top: -3.8em; /* Adjust as necessary */
+    /* Adjust position relative to the hero section */
     color: white;
 }
 
@@ -156,10 +159,21 @@ body {
 /* Adjust text size for smaller screens */
 @media (max-width: 768px) {
     .herotText {
-        font-size: 2.5rem;
+        font-size: 4em;
+        position: absolute;
+      top: -.5em;
     }
     .herotUnderText {
-        font-size: 1.2rem;
+     display: none;
+
+    }
+    .SKY{
+       
+        font-size: 3em;
+        position: absolute;
+        top: 2em;
+   
+       
     }
 }
 
@@ -176,18 +190,20 @@ body {
     z-index: 3;
     display: flex;
     justify-content: center;
+    position: absolute;
+    top:22.5em
 }
 
 .cta {
     display: flex;
-    padding: 10px 45px;
+    padding: .09em 1em;
     text-decoration: none;
     font-family: "Oswald", sans-serif;
-    font-size: 40px;
+    font-size: 1.8em;
     color: rgb(255, 255, 255);
-    background: #7e0dc9;
+    background: #3d21ba;
     transition: 1s;
-    box-shadow: 6px 6px 0 rgb(167, 2, 2);
+    box-shadow: 6px 6px 0 rgb(215, 215, 215);
     transform: skewX(-15deg);
 }
 
@@ -254,43 +270,80 @@ body {
     background-color: #f8f8f8;
     position: relative;
     transform: rotate(3deg);
-    top:-260px;
+    top:-6em;
+    left: -10px;
     
     
     
 }
 .about-container {
+    
     z-index: 2;
     position: relative;
-    top:-370px;
+    top:-20em;
     padding: 50px 20px;
-    background-color: #f8f8f8;
+    background-color: #f8f8f800;
 }
+
+/* Adjust text size for smaller screens */
+
 
 .about-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
+  
 }
+@media (max-width: 768px) {
+    .about-wrapper {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+}}
 
 .profile-image-container {
-    margin-right: 30px;
+   
+    /* -webkit-box-shadow: -5px 7px 18px 1px rgba(0,0,0,0.73); 
+box-shadow: -5px 7px 18px 1px rgba(0,0,0,0.73); */
+border-radius:10px; 
+margin-top: -20em ; 
+    
 }
 
 .profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    
+    width: 15em; /* Set your desired width */
+    height: auto; /* Maintain aspect ratio */
+
+
+}
+@media (max-width: 768px) {
+    .profile-pic {
+        position: relative;
+        top: 14em;
+
+        
+    }
+    .h2about-title{
+        position: relative;
+        top: 4.5em;
+        text-align: center;
+        
+    }
+    .about-text{
+        position: relative;
+        top: 9em;
+    }
+
+    
 }
 
-.about-text-container {
-    max-width: 600px;
-}
 
 .h2about-title {
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
+
 
 .about-text {
     font-size: 1.1rem;
@@ -299,28 +352,138 @@ body {
 
 /* Projects Section */
 .projects-container {
+    
     padding: 50px 20px;
-    background-color: #f0f0f0;
+    background-color: #18015c ;
     text-align: center;
+    position:relative;
+    top: -18em;
+
+}
+
+@media (max-width: 768px) {
+    .projects-container {
+    position: relative;
+    top: -12em;}
+}
+.project-wrapper{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .h2projects-title {
+    font-family: "Oswald", sans-serif;
     font-size: 2.5rem;
     margin-bottom: 40px;
+    
 }
+
+.laptop {
+    position: relative;
+    margin: 1em;
+    max-width: 40em;
+}
+
+.laptop__screen {
+    position: relative;
+    z-index: 1;
+    padding: 3%;
+    border-radius: 2rem;
+    background: #ecf1f7;
+    background-image: linear-gradient(to bottom, #333, #111);
+    box-shadow: 0 .1rem 0 #cfcfcf;
+    border: 2px solid #ccc;
+}
+
+.laptop__screen img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height);
+    background: #000;
+}
+
+.laptop__bottom {
+    position: relative;
+    z-index: 1;
+    margin-right: -7%;
+    margin-left: -7%;
+    height: .7rem;
+    background: #e9eff5;
+    background-image: linear-gradient(to right, #d2dde9 0%, #f9fcff 15%, #e5ebf2 40%, #e5ebf2 60%, #f9fcff 85%, #d2dde9 100%);
+}
+
+.laptop__bottom::before {
+    display: block;
+    margin: 0 auto;
+    width: 20%;
+    height: .7rem;
+    border-radius: 0 0 .2rem .2rem;
+    background: #f6f9fc;
+    background-image: linear-gradient(to right, #c3cfdb 0%, #f6f9fc 10%, #f6f9fc 90%, #c3cfdb 100%);
+    content: " ";
+}
+
+.laptop__under {
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    display: block;
+    width: 50%;
+    height: 1.5rem;
+    background: #e2e8f0;
+    background-image: linear-gradient(to bottom, #e2e8f0, #bec7d1);
+}
+
+.laptop__under::before, .laptop__under::after {
+    position: absolute;
+    top: 0%;
+    right: 100%;
+    bottom: 0;
+    display: block;
+    width: 50%;
+    border-bottom-left-radius: 100%;
+    background: inherit;
+    content: " ";
+}
+
+.laptop__under::after {
+    right: auto;
+    left: 100%;
+    border-bottom-right-radius: 100%;
+    border-bottom-left-radius: 0;
+}
+
+.laptop__shadow {
+    position: absolute;
+    right: -10%;
+    bottom: -2.5rem;
+    left: -10%;
+    z-index: 0;
+    height: 2rem;
+    background: radial-gradient(ellipse closest-side, #000, transparent);
+    opacity: 0.5;
+}
+
 
 .project {
     margin-bottom: 40px;
 }
 
 .h3project-title {
-    font-size: 1.75rem;
+    font-family: "Oswald", sans-serif;
+    font-size: 3rem;
     margin-bottom: 10px;
+    color: #bec7d1;
+    
 }
 
 .project-description {
+    font-family: "Oswald", sans-serif;
     font-size: 1rem;
-    color: #555;
+    color: #ffffff;
 }
 
 /* Hire Me Section */
@@ -331,12 +494,12 @@ body {
 }
 
 .hire-me-container h2 {
-    font-size: 2rem;
+    font-size: 2em;
     margin-bottom: 20px;
 }
 
 .hire-me-container p {
-    font-size: 1.2rem;
+    font-size: 1.2em;
 }
 
 /* Contact Section */

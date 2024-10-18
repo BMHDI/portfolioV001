@@ -142,6 +142,159 @@ const animate = () => {
 animate();
 
 
+// Typing animation tools
+const items = [
+    "Javascript",
+    "HTML",
+    "THREE.js",
+    "Node.js",
+    "CSS",
+    "MongoDB",
+    "Express.js",
+    "React.js",
+    "..."
+];
+
+let index = 0; // Track the current item in the array
+let currentText = ""; // Track the current text being typed
+let isDeleting = false; // Track if it's deleting
+const typingSpeed = 150; // Speed of typing in ms
+const deletingSpeed = 100; // Speed of deleting in ms
+const pauseBetweenWords = 1000; // Pause before deleting or typing the next word
+
+function type() {
+    const typingElement = document.getElementById("typing");
+
+    if (isDeleting) {
+        // Delete the text character by character
+        currentText = items[index].substring(0, currentText.length - 1);
+    } else {
+        // Type the text character by character
+        currentText = items[index].substring(0, currentText.length + 1);
+    }
+
+    // Update the content of the typing element
+    typingElement.textContent = currentText;
+
+    if (!isDeleting && currentText === items[index]) {
+        // If the word is fully typed, wait for a while before deleting
+        setTimeout(() => {
+            isDeleting = true;
+            type(); // Continue typing
+        }, pauseBetweenWords);
+    } else if (isDeleting && currentText === "") {
+        // If the word is fully deleted, move to the next word
+        isDeleting = false;
+        index = (index + 1) % items.length; // Loop back to the first word after the last one
+        setTimeout(type, typingSpeed); // Start typing the next word
+    } else {
+        // Continue typing or deleting
+        const speed = isDeleting ? deletingSpeed : typingSpeed;
+        setTimeout(type, speed);
+    }
+}
+
+// Start the typing effect
+type();
 
 
 
+
+
+//   Animation h3abouttitle
+
+
+// The text to be type
+
+  const text = "Hi! I'm Tarik";
+  const h3Element = document.querySelector('#about-title'); // Adjust selector if needed
+
+  function typeText(text, element) {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < text.length) {
+        element.textContent += text.charAt(index); // Add one character at a time
+        index++;
+      } else {
+        clearInterval(interval); // Stop typing once complete
+      }
+    }, 100); // Speed of typing (100ms per character)
+  }
+
+  // Start the typing animation after 8 seconds
+  setTimeout(() => {
+    if (h3Element) {
+      typeText(text, h3Element);
+    } else {
+      console.error("Element not found");
+    }
+  }, 8000);
+
+
+//   Email sending logic 
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const form = document.getElementById('contact_form');
+  
+//     form.addEventListener('submit', function (event) {
+//       event.preventDefault(); // Prevent form from reloading the page
+  
+//       const serviceID = 'service_xn80acr'; // Replace with your EmailJS service ID
+//       const templateID = 'template_4pxslyp'; // Replace with your EmailJS template ID
+  
+//       emailjs.sendForm(serviceID, templateID, this)
+//         .then(() => {
+//           alert('Message sent successfully!');
+//           form.reset(); // Clear the form fields
+//         })
+//         .catch((error) => {
+//           console.error('Email sending failed:', error);
+//           alert('Failed to send message. Please try again.');
+//         });
+//     });
+//   });
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.contact_form'); // Use class selector
+    console.log(form); // Check if the form is found
+  
+    if (!form) {
+      console.error('Form not found. Ensure the element class matches.');
+      return;
+    }
+  
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent page reload
+  
+      const serviceID = 'service_xn80acr'; // Replace with your EmailJS service ID
+      const templateID = 'template_4pxslyp'; // Replace with your EmailJS template ID
+  
+      emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+          alert('Message sent successfully!');
+          form.reset(); // Clear form fields
+        })
+        .catch((error) => {
+          console.error('Email sending failed:', error);
+          alert('Failed to send message. Please try again.');
+        });
+    });
+  });
+  
+//   NAVBAR
+
+
+  let lastScrollTop = 0;
+  const navbar = document.querySelector('.navbar');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+      // Scrolling down
+      navbar.style.top = '-60px'; // Adjust the value to the height of your navbar
+    } else {
+      // Scrolling up
+      navbar.style.top = '0';
+    }
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+  });

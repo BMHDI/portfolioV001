@@ -27,8 +27,9 @@ const mouse = new THREE.Vector2();
 let isModelSelected = false;
 
 // Load the model
+
 const loader = new GLTFLoader();
-loader.load('public/scene/scene.gltf', (gltf) => {
+loader.load('scene/scene.gltf', (gltf) => {
     model = gltf.scene;
 
     // Center the model in the scene

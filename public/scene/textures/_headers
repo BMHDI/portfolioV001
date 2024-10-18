@@ -1,0 +1,5 @@
+/models/*.glb
+  Content-Type: model/gltf-binary
+
+/models/*.gltf
+  Content-Type: model/gltf+json

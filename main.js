@@ -56,6 +56,7 @@ loader.load('scene/scene.gltf', (gltf) => {
 });
 
 // Set up OrbitControls
+// Set up OrbitControls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
@@ -63,6 +64,40 @@ controls.screenSpacePanning = false;
 controls.enableRotate = true; 
 controls.rotateSpeed = 0.5;
 controls.enableZoom = false;
+
+// Flag to detect if the user is interacting via touch
+let isTouching = false;
+
+// Track the starting touch position
+let startTouchY = 0;
+let touchDeltaY = 0;
+
+// Handle touch start event
+renderer.domElement.addEventListener('touchstart', (event) => {
+    if (event.touches.length === 1) {
+        isTouching = true;  // User started a touch interaction
+        startTouchY = event.touches[0].clientY;  // Store the touch position
+    }
+});
+
+// Handle touch move event
+renderer.domElement.addEventListener('touchmove', (event) => {
+    if (isTouching && event.touches.length === 1) {
+        touchDeltaY = event.touches[0].clientY - startTouchY; // Calculate movement distance
+
+        // If the user is dragging down, allow the page to scroll
+        if (touchDeltaY > 0) {
+            event.preventDefault();  // Prevent scrolling while interacting with the 3D object
+            window.scrollBy(0, touchDeltaY); // Scroll the page down
+        }
+    }
+});
+
+// Handle touch end event
+renderer.domElement.addEventListener('touchend', () => {
+    isTouching = false;  // User ended the touch interaction
+});
+
 
 // Limit movement to Y-axis
 controls.maxPolarAngle = Math.PI / 2; // Allow looking down to the horizon

@@ -140,16 +140,21 @@ body {
 }
 
 .theMoon {
-  min-height: 600px;
 
-  /* position: relative;
-    top: -25rem;
-    left: -40rem;
-    transform: translateX(-50%); */
+  min-height: 100px;
+scroll-behavior: smooth;
+position: relative;
+top: -25em;
   width: 100%;
-  height: 100%;
+  height: 10%;
   z-index: 2;
-  border-radius: 50%;
+
+}
+@media (max-width: 768px) { /* Target mobile devices */
+  canvas[data-engine="three.js r169"] {
+    touch-action: auto !important; /* Allow default touch behaviors */
+    pointer-events: none; /* Disable interaction with the canvas */
+  }
 }
 .text-container {
   display: flex;
@@ -429,9 +434,12 @@ iframe {
   background-position: center;
   top: 1em;
   left: 10em;
-  z-index: 5;
+  z-index: 3;
 }
 .mobile iframe {
+  z-index: 9;
+border-color: #defff7;
+border-style: dotted;
   width: 660px;
   height: 990px;
   top: 64px;
@@ -1149,7 +1157,7 @@ min-width: 375px;
   width: 65%;
   
     padding: 4em 1%;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: #0a0333;
     box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s ease-out, box-shadow 0.2s;
@@ -1184,24 +1192,25 @@ input, textarea {
     border-bottom: 2px solid #4b4545; /* Optional: Underline for inputs */
     border-radius: 0; /* Remove rounding */
     padding: 12px;
-    color: #fff;
+    color: #fdfdfd;
     font-size: 18px;
     outline: none;
     transition: all 0.3s ease;
-    border-radius: 20px;
+    border-radius: 10px;
     
 }
 
 /* On focus - Underline color change */
 input:focus, textarea:focus {
     border-bottom-color: #ffd000;
-    background-color: #1c3a57;
-    box-shadow: 0 0 12px #ff6347;
-    padding: 1em;
+    background-color: #010407;
+    box-shadow: 0 0 3px #e7d9d6;
+
 }
 
 /* Button styling */
 .submit {
+
     width: 20%;
     padding: 12px;
     background-color: #6206a5;
@@ -1505,10 +1514,10 @@ button:hover {
 
 .social-links {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  margin: 0em 5em;
+  margin: 1em 5em;
 
 
 

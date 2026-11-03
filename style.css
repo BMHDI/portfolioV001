@@ -1539,3 +1539,32 @@ margin: 1em 3em;
   }
   
 }
+
+/* Conservative responsive polish: preserve the original visual design. */
+@media (max-width: 768px) {
+  html { scroll-behavior: smooth; }
+  img, video, canvas, iframe { max-width: 100%; }
+  .navbar ul { flex-wrap: wrap; }
+  .herosection, .test, .about-text-container, .projects-section,
+  .scoped-layout, .contact-wrapper, .testemonials-container, .footer {
+    max-width: 100%;
+  }
+  .about-text-container { padding-inline: clamp(16px, 5vw, 32px); }
+  .project-wrap, .projects-box, .display { max-width: 100%; }
+  .contact-me-container { box-sizing: border-box; }
+}
+@media (max-width: 480px) {
+  .navbar ul { gap: 10px; padding-inline: 12px; }
+  .navbar a { font-size: clamp(12px, 3.5vw, 15px); }
+  .about-text-container { padding-inline: 18px; }
+  .contact-me-container { width: calc(100% - 24px); min-width: 0; }
+  .submit { width: auto; min-width: 110px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
